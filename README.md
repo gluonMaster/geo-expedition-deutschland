@@ -1,46 +1,41 @@
 # Geo-Expedition Deutschland
 
-An offline geography learning application about Germany, with interactive maps, short missions and German vocabulary supported by Russian explanations. The material is aimed at grade 5 learners in a German school setting.
+**[▶ Open in the browser](https://gluonmaster.github.io/geo-expedition-deutschland/)**
+
+A geography learning app about Germany for grade 5. Students explore interactive maps of the landscapes, federal states and rivers, then go on short missions that test what they've learned. Like [Chemie-Eroberung](https://github.com/gluonMaster/chemie-eroberung), it is made for Russian-speaking students at German schools: the explanations are in Russian, and the place names, terms and model answers are in German.
+
+![Interactive map with the info card for the Harz](docs/screenshots/map.png)
 
 ## Features
 
 - Three map layers: physical geography, federal states and waterways.
-- Information cards for geographic features and all 16 federal states.
-- 62 exercises across orientation, coasts, lowlands, central uplands and revision.
-- Five task formats: map selection, multiple choice, matching, ordering and linked three-part questions.
-- Randomized mission selections, hints, explanations, a dictionary and model German answers.
-- Progress and previous mistakes stored in the current browser.
+- Info cards for landscapes and other map features and for all 16 federal states, each with a Russian explanation and a short German description.
+- 62 tasks across five missions (orientation, coasts, lowlands, uplands and a final review) in five formats: pick on the map, multiple choice, matching, ordering and three-step questions.
+- Missions are drawn at random from the task pool, with hints, explanations, a glossary and model answers.
+- Progress and earlier mistakes are saved in the browser.
 
-## Run locally
+## Running it locally
 
-Open [index.html](index.html) in a browser. There is no npm installation, build step, backend, external map service or API key.
-
-If Python is available, an optional local server can be started from the repository folder:
+Open [index.html](index.html). There is nothing to install or build, and the app needs no backend, map service or API key. To serve it locally instead:
 
 ```sh
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-Then open `http://127.0.0.1:8000/`.
+and open `http://127.0.0.1:8000/`. The layout is made for laptops and tablets.
 
 ## Source layout
 
 | Path | Purpose |
 | --- | --- |
-| [index.html](index.html) | Application shell, SVG map regions and local resource links |
-| [js/app.js](js/app.js) | Navigation, interactive tasks, mission selection and progress |
-| [js/data.js](js/data.js) | Learning material, map objects, terminology and exercises |
-| [css/styles.css](css/styles.css) | Interface and map presentation |
-| `assets/map-*-schematic.png` | Included map backgrounds |
+| [index.html](index.html) | App shell and the clickable SVG map regions |
+| [js/app.js](js/app.js) | Navigation, tasks, missions and progress |
+| [js/data.js](js/data.js) | Learning content, map objects, glossary and tasks |
+| [css/styles.css](css/styles.css) | Layout and map styling |
+| `assets/map-*-schematic.png` | Map backgrounds |
 
-All data and resources are included locally. Progress uses `localStorage`; it is not uploaded or synchronized between devices. Clearing browser storage removes that progress. If browser storage is unavailable, the application continues without persistent saving.
+Progress is stored in `localStorage` and never leaves the browser. The map backgrounds were generated with GPT and simplified for teaching; they are illustrations, not exact cartography.
 
-## Scope and limitations
+## Credits and license
 
-The interface primarily uses Russian; German terms and model answers support learning the school vocabulary. The layout is primarily intended for a laptop or tablet.
-
-Map backgrounds and simplified clickable regions are educational illustrations, not authoritative cartographic data. The application is not a complete curriculum or an official assessment system. Browser interaction and educational accuracy should be reviewed for the intended classroom use.
-
-## Graphics and licensing
-
-The repository owner identifies the included map graphics as GPT-generated. Existing provenance metadata is preserved where present. No software or graphics license has been selected for this repository.
+Made by Dr. Konstantin S. Shakun with the help of AI coding agents. The code is available under the [MIT License](LICENSE).
