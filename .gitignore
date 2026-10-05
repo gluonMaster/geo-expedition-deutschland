@@ -1,0 +1,32 @@
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Editor, OS and local runtime artifacts
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.log
+*.tmp
+*.temp
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+.cache/
+coverage/
+.playwright-mcp/
+
+# Reference material and local authoring/debug files
+*.pdf
+/prompt_*.md
+/germany-map-physical.jpg
+/political-screen.png
+/map-*.png
+/physical-grid.png
+/water-detect-*.png

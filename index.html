@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Geo-Expedition Deutschland</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="brand" data-route="home" aria-label="На стартовый экран">
+      <span class="brand-mark">🧭</span>
+      <span><strong>Geo-Expedition Deutschland</strong><small>Küsten · Tiefland · Mittelgebirge</small></span>
+    </button>
+    <nav class="topnav" aria-label="Навигация">
+      <button data-route="map">Карта</button>
+      <button data-route="missions">Миссии</button>
+      <button data-route="dictionary">Словарь</button>
+      <button data-route="answers">Готовые ответы</button>
+      <button data-route="quiz">Quiz</button>
+    </nav>
+    <div class="progress-pill" id="globalProgress" aria-live="polite">Прогресс: 0%</div>
+  </header>
+
+  <main id="app" tabindex="-1"></main>
+
+  <template id="map-template">
+    <figure class="map-figure" aria-label="Интерактивная карта Германии">
+      <svg class="germany-map" viewBox="0 0 1086 1448" role="img" aria-labelledby="mapTitle mapDesc" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title id="mapTitle">Учебная интерактивная карта Германии</title>
+        <desc id="mapDesc">Узнаваемая карта Германии с пассивными картографическими слоями и прозрачными кликабельными SVG-областями.</desc>
+        <defs>
+          <filter id="mapShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#153a35" flood-opacity="0.18"></feDropShadow>
+          </filter>
+          <clipPath id="germanyLandClip" clipPathUnits="userSpaceOnUse">
+            <path d="M366 26 L349 61 L350 112 L360 121 L365 99 L380 104 L382 115 L401 105 L410 110 L408 132 L400 124 L390 129 L393 147 L384 168 L406 179 L402 191 L418 204 L401 212 L414 241 L398 240 L390 231 L378 234 L364 264 L366 285 L349 273 L332 283 L311 243 L246 248 L195 262 L199 274 L214 261 L233 262 L210 315 L212 322 L233 327 L225 384 L212 403 L207 435 L178 432 L170 451 L174 465 L203 481 L198 509 L178 529 L168 527 L160 535 L159 547 L170 554 L163 567 L115 576 L95 566 L77 576 L79 597 L97 631 L95 660 L74 684 L79 700 L51 715 L51 728 L64 741 L51 759 L56 775 L65 778 L61 800 L74 806 L82 839 L97 844 L94 859 L74 875 L66 894 L66 916 L76 935 L100 946 L95 965 L77 985 L77 1014 L86 1020 L88 1010 L103 1015 L113 1046 L127 1056 L139 1041 L146 1044 L148 1060 L169 1055 L174 1064 L187 1066 L202 1060 L221 1085 L233 1085 L233 1078 L251 1085 L214 1135 L216 1152 L182 1213 L182 1240 L163 1296 L175 1314 L197 1319 L209 1313 L222 1317 L233 1301 L254 1311 L272 1304 L286 1311 L288 1293 L267 1292 L274 1277 L285 1277 L305 1298 L315 1294 L321 1306 L371 1304 L414 1331 L396 1335 L378 1319 L392 1338 L414 1339 L427 1359 L448 1364 L464 1403 L498 1377 L500 1352 L518 1357 L520 1346 L577 1390 L616 1389 L645 1350 L678 1358 L686 1338 L735 1342 L755 1322 L775 1332 L798 1326 L809 1354 L828 1360 L841 1318 L824 1307 L831 1286 L804 1245 L844 1213 L868 1209 L884 1170 L914 1185 L927 1164 L922 1127 L890 1099 L873 1101 L816 1035 L793 1036 L758 987 L764 952 L724 918 L750 902 L753 882 L788 905 L789 887 L828 887 L826 868 L870 869 L886 882 L964 867 L952 847 L928 852 L929 841 L978 833 L949 818 L943 772 L965 763 L960 739 L979 745 L986 776 L1010 777 L1034 673 L1022 632 L995 625 L998 605 L982 585 L992 574 L989 537 L976 527 L970 459 L920 421 L952 354 L925 255 L900 254 L903 240 L925 245 L923 230 L880 188 L840 190 L857 166 L879 180 L880 160 L864 146 L874 126 L850 124 L849 105 L816 118 L818 157 L763 140 L722 190 L684 194 L655 225 L642 214 L618 221 L606 218 L607 210 L638 195 L641 163 L659 163 L649 136 L633 157 L606 166 L574 144 L560 149 L541 135 L536 81 L509 68 L469 81 L397 55 L400 100 L381 104 L370 75 L356 72 L348 61 L361 29 Z"></path>
+          </clipPath>
+        </defs>
+
+        <rect class="map-ocean" width="1086" height="1448" fill="#cfeff8"></rect>
+
+        <g class="map-layer physical-layer" data-map-layer="physical">
+          <image class="map-raster-base" href="assets/map-physical-schematic.png" xlink:href="assets/map-physical-schematic.png" x="0" y="0" width="1086" height="1448" preserveAspectRatio="none"></image>
+          <path class="map-object hit-sea" data-id="nordsee" data-category="Küsten" fill-rule="evenodd" d="M0 0 L0 429 L206 429 L226 377 L224 356 L234 330 L210 321 L221 278 L242 260 L290 257 L284 252 L243 258 L242 250 L311 242 L318 252 L302 253 L322 260 L333 287 L344 272 L367 285 L363 264 L380 232 L394 232 L394 177 L383 168 L394 147 L394 113 L379 113 L394 104 L394 0 Z M151 192 L150 200 L93 198 L97 183 L127 182 Z M181 111 L229 110 L234 121 L186 124 Z M177 104 L175 132 L164 153 L129 173 L88 161 L68 124 L11 124 L9 107 L67 111 L85 71 L118 56 L157 69 Z M88 30 L153 32 L156 44 L90 45 Z M371 25 L380 38 L365 60 L381 67 L370 75 L356 72 L358 91 L352 95 L348 61 L361 29 Z"></path>
+          <path class="map-object hit-sea" data-id="ostsee" data-category="Küsten" fill-rule="evenodd" d="M560 0 L560 149 L574 144 L606 166 L633 157 L624 142 L643 133 L660 154 L642 163 L639 195 L607 210 L606 217 L618 221 L642 213 L654 225 L684 193 L722 189 L763 139 L825 154 L817 149 L819 136 L813 137 L815 118 L849 104 L851 124 L867 118 L875 126 L865 146 L881 160 L880 180 L857 165 L839 189 L850 195 L880 187 L922 226 L927 241 L902 241 L893 251 L906 258 L925 254 L930 269 L1085 269 L1085 0 Z"></path>
+
+          <g class="physical-hit-land" clip-path="url(#germanyLandClip)">
+          <polygon class="map-object hit-area hit-tiefland" data-id="norddeutsches-tiefland" data-category="Tiefland" points="210,225 330,70 500,70 650,160 850,170 940,310 955,560 850,650 700,645 610,585 470,590 330,560 190,640 120,520 155,370"></polygon>
+          <polygon class="map-object hit-area hit-mittel" data-id="mittelgebirge" data-category="Mittelgebirge" points="85,600 250,610 355,660 520,670 680,710 850,715 1010,775 970,960 840,1030 655,990 510,940 360,1000 185,970 75,830"></polygon>
+          <polygon class="map-object hit-area hit-vorland" data-id="alpenvorland" data-category="Orientierung" points="280,965 505,990 720,980 940,1035 890,1190 720,1240 500,1205 315,1190 235,1090"></polygon>
+          <polygon class="map-object hit-area hit-alpen" data-id="alpen" data-category="Mittelgebirge" points="305,1190 500,1208 715,1240 910,1188 865,1360 690,1410 520,1370 350,1325"></polygon>
+
+          <ellipse class="map-object hit-area hit-feature" data-id="lueneburger-heide" data-category="Tiefland" cx="432" cy="449" rx="105" ry="57" transform="rotate(7 432 449)"></ellipse>
+          <ellipse class="map-object hit-area hit-feature" data-id="altmark" data-category="Tiefland" cx="662" cy="448" rx="70" ry="58"></ellipse>
+          <ellipse class="map-object hit-area hit-feature" data-id="oderbruch" data-category="Tiefland" cx="929" cy="523" rx="47" ry="108"></ellipse>
+          <ellipse class="map-object hit-area hit-feature" data-id="magdeburger-boerde" data-category="Tiefland" cx="690" cy="570" rx="105" ry="59"></ellipse>
+          <path class="map-object hit-area hit-feature" data-id="leipziger-tieflandsbucht" data-category="Tiefland" d="M612 665 C660 634 747 626 814 654 C875 679 910 728 874 774 C838 821 746 831 672 795 C616 768 582 705 612 665 Z"></path>
+          <ellipse class="map-object hit-area hit-feature" data-id="harz" data-category="Mittelgebirge" cx="506" cy="633" rx="82" ry="61"></ellipse>
+          <ellipse class="map-object hit-area hit-feature" data-id="thueringer-wald" data-category="Mittelgebirge" cx="596" cy="826" rx="107" ry="48" transform="rotate(6 596 826)"></ellipse>
+          <ellipse class="map-object hit-area hit-feature" data-id="erzgebirge" data-category="Mittelgebirge" cx="795" cy="858" rx="146" ry="45" transform="rotate(-12 795 858)"></ellipse>
+          <ellipse class="map-object hit-area hit-feature" data-id="saechsische-schweiz" data-category="Mittelgebirge" cx="904" cy="860" rx="58" ry="54" transform="rotate(-4 904 860)"></ellipse>
+          <circle class="map-object hit-area hit-feature" data-id="elbsandsteingebirge" data-category="Mittelgebirge" cx="907" cy="866" r="32"></circle>
+          <path class="map-object hit-area hit-feature" data-id="schwarzwald" data-category="Mittelgebirge" d="M288 986 C324 1006 332 1065 309 1122 C287 1176 280 1228 286 1274 C271 1324 231 1344 184 1336 C163 1311 174 1260 192 1214 C212 1164 215 1120 212 1075 C214 1024 247 991 288 986 Z"></path>
+          </g>
+        </g>
+
+        <g class="map-layer political-layer" data-map-layer="political">
+          <image class="map-raster-base political-raster" href="assets/map-political-schematic.png" xlink:href="assets/map-political-schematic.png" x="0" y="0" width="1086" height="1448" preserveAspectRatio="none"></image>
+          <rect class="political-softener" x="0" y="0" width="1086" height="1448"></rect>
+          <polygon class="map-object state state-hit state-north" data-id="schleswig-holstein" data-category="Bundesländer" points="310,38 540,43 640,145 625,260 520,305 370,270 305,170"></polygon>
+          <polygon class="map-object state state-hit state-northeast" data-id="mecklenburg-vorpommern" data-category="Bundesländer" points="620,135 780,92 965,105 1040,225 990,365 805,372 665,315"></polygon>
+          <polygon class="map-object state state-hit state-northwest" data-id="niedersachsen" data-category="Bundesländer" points="145,270 365,235 560,285 650,410 625,625 420,650 290,600 120,540 105,395"></polygon>
+          <circle class="map-object state state-hit city-state" data-id="hamburg" data-category="Bundesländer" cx="512" cy="295" r="34"></circle>
+          <circle class="map-object state state-hit city-state" data-id="bremen" data-category="Bundesländer" cx="355" cy="370" r="27"></circle>
+          <polygon class="map-object state state-hit state-west" data-id="nordrhein-westfalen" data-category="Bundesländer" points="0,590 270,555 420,680 350,860 100,842 0,760"></polygon>
+          <polygon class="map-object state state-hit state-center" data-id="hessen" data-category="Bundesländer" points="335,650 515,630 585,800 520,965 380,935 325,790"></polygon>
+          <polygon class="map-object state state-hit state-west2" data-id="rheinland-pfalz" data-category="Bundesländer" points="55,835 350,832 395,980 285,1090 92,1032"></polygon>
+          <circle class="map-object state state-hit city-state" data-id="saarland" data-category="Bundesländer" cx="106" cy="1015" r="48"></circle>
+          <polygon class="map-object state state-hit state-southwest" data-id="baden-wuerttemberg" data-category="Bundesländer" points="252,1000 550,970 615,1238 510,1388 250,1322 175,1170"></polygon>
+          <polygon class="map-object state state-hit state-south" data-id="bayern" data-category="Bundesländer" points="560,875 850,850 980,1060 912,1282 710,1370 558,1280 500,1030"></polygon>
+          <polygon class="map-object state state-hit state-east" data-id="sachsen-anhalt" data-category="Bundesländer" points="570,345 750,348 842,492 800,632 600,617 530,500"></polygon>
+          <polygon class="map-object state state-hit state-east2" data-id="brandenburg" data-category="Bundesländer" points="755,310 1005,320 1050,500 995,680 820,630 785,500"></polygon>
+          <circle class="map-object state state-hit city-state berlin-hit" data-id="berlin" data-category="Bundesländer" cx="875" cy="472" r="32"></circle>
+          <polygon class="map-object state state-hit state-thueringen" data-id="thueringen" data-category="Bundesländer" points="520,618 760,610 803,760 650,850 500,790"></polygon>
+          <polygon class="map-object state state-hit state-sachsen" data-id="sachsen" data-category="Bundesländer" points="768,635 1018,650 1055,760 930,852 750,820 690,710"></polygon>
+
+          <g class="state-markers">
+            <circle class="map-object state-marker" data-id="schleswig-holstein" data-category="Bundesländer" cx="465" cy="185" r="14"></circle>
+            <circle class="map-object state-marker" data-id="mecklenburg-vorpommern" data-category="Bundesländer" cx="815" cy="240" r="14"></circle>
+            <circle class="map-object state-marker" data-id="niedersachsen" data-category="Bundesländer" cx="360" cy="430" r="14"></circle>
+            <circle class="map-object state-marker city-marker" data-id="hamburg" data-category="Bundesländer" cx="512" cy="304" r="12"></circle>
+            <circle class="map-object state-marker city-marker" data-id="bremen" data-category="Bundesländer" cx="355" cy="380" r="12"></circle>
+            <circle class="map-object state-marker" data-id="nordrhein-westfalen" data-category="Bundesländer" cx="230" cy="690" r="14"></circle>
+            <circle class="map-object state-marker" data-id="hessen" data-category="Bundesländer" cx="455" cy="815" r="14"></circle>
+            <circle class="map-object state-marker" data-id="rheinland-pfalz" data-category="Bundesländer" cx="210" cy="965" r="14"></circle>
+            <circle class="map-object state-marker city-marker" data-id="saarland" data-category="Bundesländer" cx="112" cy="1030" r="12"></circle>
+            <circle class="map-object state-marker" data-id="baden-wuerttemberg" data-category="Bundesländer" cx="405" cy="1160" r="14"></circle>
+            <circle class="map-object state-marker" data-id="bayern" data-category="Bundesländer" cx="735" cy="1115" r="14"></circle>
+            <circle class="map-object state-marker" data-id="sachsen-anhalt" data-category="Bundesländer" cx="690" cy="535" r="14"></circle>
+            <circle class="map-object state-marker" data-id="brandenburg" data-category="Bundesländer" cx="900" cy="555" r="14"></circle>
+            <circle class="map-object state-marker city-marker" data-id="berlin" data-category="Bundesländer" cx="875" cy="482" r="12"></circle>
+            <circle class="map-object state-marker" data-id="thueringen" data-category="Bundesländer" cx="645" cy="745" r="14"></circle>
+            <circle class="map-object state-marker sachsen-marker" data-id="sachsen" data-category="Bundesländer" cx="885" cy="748" r="18"></circle>
+          </g>
+
+          <g class="political-labels">
+            <text x="465" y="185">Schleswig-<tspan x="465" dy="28">Holstein</tspan></text>
+            <text x="815" y="240">Mecklenburg-<tspan x="815" dy="28">Vorpommern</tspan></text>
+            <text x="360" y="430">Niedersachsen</text>
+            <text x="512" y="304">Hamburg</text>
+            <text x="355" y="380">Bremen</text>
+            <text x="230" y="690">Nordrhein-<tspan x="230" dy="28">Westfalen</tspan></text>
+            <text x="455" y="815">Hessen</text>
+            <text x="210" y="965">Rheinland-<tspan x="210" dy="28">Pfalz</tspan></text>
+            <text x="112" y="1030">Saarland</text>
+            <text x="405" y="1160">Baden-<tspan x="405" dy="28">Württemberg</tspan></text>
+            <text x="735" y="1115">Bayern</text>
+            <text x="690" y="535">Sachsen-<tspan x="690" dy="28">Anhalt</tspan></text>
+            <text x="900" y="555">Brandenburg</text>
+            <text x="875" y="482">Berlin</text>
+            <text x="645" y="745">Thüringen</text>
+            <text x="885" y="748" class="sachsen-label">Sachsen</text>
+          </g>
+        </g>
+
+        <g class="map-layer water-layer" data-map-layer="water">
+          <image class="map-raster-base water-base" href="assets/map-physical-schematic.png" xlink:href="assets/map-physical-schematic.png" x="0" y="0" width="1086" height="1448" preserveAspectRatio="none"></image>
+          <rect class="water-softener" x="0" y="0" width="1086" height="1448"></rect>
+          <path class="sea-area map-object" data-id="nordsee" data-category="Küsten" fill-rule="evenodd" d="M0 0 L0 429 L206 429 L226 377 L224 356 L234 330 L210 321 L221 278 L242 260 L290 257 L284 252 L243 258 L242 250 L311 242 L318 252 L302 253 L322 260 L333 287 L344 272 L367 285 L363 264 L380 232 L394 232 L394 177 L383 168 L394 147 L394 113 L379 113 L394 104 L394 0 Z M151 192 L150 200 L93 198 L97 183 L127 182 Z M181 111 L229 110 L234 121 L186 124 Z M177 104 L175 132 L164 153 L129 173 L88 161 L68 124 L11 124 L9 107 L67 111 L85 71 L118 56 L157 69 Z M88 30 L153 32 L156 44 L90 45 Z M371 25 L380 38 L365 60 L381 67 L370 75 L356 72 L358 91 L352 95 L348 61 L361 29 Z"></path>
+          <path class="sea-area map-object" data-id="ostsee" data-category="Küsten" fill-rule="evenodd" d="M560 0 L560 149 L574 144 L606 166 L633 157 L624 142 L643 133 L660 154 L642 163 L639 195 L607 210 L606 217 L618 221 L642 213 L654 225 L684 193 L722 189 L763 139 L825 154 L817 149 L819 136 L813 137 L815 118 L849 104 L851 124 L867 118 L875 126 L865 146 L881 160 L880 180 L857 165 L839 189 L850 195 L880 187 L922 226 L927 241 L902 241 L893 251 L906 258 L925 254 L930 269 L1085 269 L1085 0 Z"></path>
+          <text class="water-label big" x="120" y="170">die Nordsee</text>
+          <text class="water-label big" x="820" y="142">die Ostsee</text>
+
+          <g class="water-inland" clip-path="url(#germanyLandClip)">
+            <path class="river map-object" data-id="rhein" data-category="Gewässer" d="M330 1288 C292 1245 248 1195 238 1134 C228 1074 254 1024 286 978 C314 938 306 887 274 850 C246 818 238 772 256 726 C276 677 286 624 250 566"></path>
+            <path class="river map-object" data-id="weser" data-category="Gewässer" d="M423 326 C400 378 394 431 406 484 C419 542 392 599 350 654 C340 670 347 686 368 698"></path>
+            <path class="river map-object" data-id="elbe" data-category="Gewässer" d="M850 884 C816 852 790 824 780 777 C766 712 722 682 692 632 C662 584 634 548 610 498 C586 449 570 391 555 336 C546 298 532 258 515 224"></path>
+            <path class="river map-object" data-id="oder" data-category="Gewässer" d="M925 300 C918 372 933 437 957 487 C982 540 974 606 946 664 C922 714 929 762 954 810 C972 846 955 887 916 932"></path>
+            <path class="river map-object" data-id="donau" data-category="Gewässer" d="M254 1260 C334 1240 414 1210 493 1178 C587 1140 699 1130 875 1104"></path>
+            <path class="river map-object" data-id="main" data-category="Gewässer" d="M274 846 C333 858 393 850 455 835 C528 818 588 829 676 868"></path>
+            <path class="river map-object" data-id="spree" data-category="Gewässer" d="M902 616 C852 603 812 576 760 532"></path>
+            <path class="river map-object" data-id="havel" data-category="Gewässer" d="M728 474 C748 508 744 552 771 586 C791 611 812 626 832 642"></path>
+            <path class="river map-object" data-id="mosel" data-category="Gewässer" d="M88 975 C126 951 166 924 207 898 C238 878 260 859 276 842"></path>
+            <path class="canal map-object" data-id="mittellandkanal" data-category="Gewässer" d="M238 558 C334 548 434 550 536 558 C624 566 687 560 742 548"></path>
+            <ellipse class="lake map-object" data-id="bodensee" data-category="Gewässer" cx="365" cy="1302" rx="54" ry="20" transform="rotate(20 365 1302)"></ellipse>
+            <ellipse class="lake map-object" data-id="mueritz" data-category="Gewässer" cx="599" cy="282" rx="15" ry="18"></ellipse>
+          </g>
+
+          <g class="water-names">
+            <text x="226" y="762">der Rhein</text>
+            <text x="394" y="520">die Weser</text>
+            <text x="638" y="585">die Elbe</text>
+            <text x="963" y="560">die Oder</text>
+            <text x="620" y="1182">die Donau</text>
+            <text x="456" y="816">der Main</text>
+            <text x="835" y="592">die Spree</text>
+            <text x="765" y="508">die Havel</text>
+            <text x="158" y="936">die Mosel</text>
+            <text x="445" y="540">der Mittellandkanal</text>
+            <text x="365" y="1334">der Bodensee</text>
+            <text x="630" y="260">die Müritz</text>
+          </g>
+        </g>
+
+        <g class="always-layer compass-layer" aria-hidden="true">
+          <rect class="compass-mask" x="0" y="0" width="248" height="230" rx="24"></rect>
+          <g class="compass" transform="translate(42 34)">
+            <circle cx="80" cy="80" r="58"></circle>
+            <path class="compass-star" d="M80 18 L94 66 L142 80 L94 94 L80 142 L66 94 L18 80 L66 66 Z"></path>
+            <path class="compass-needle" d="M80 20 L91 80 L80 140 L69 80 Z"></path>
+            <text x="80" y="-6">Norden</text>
+            <text x="80" y="170">Süden</text>
+            <text x="-24" y="86">Westen</text>
+            <text x="184" y="86">Osten</text>
+          </g>
+        </g>
+      </svg>
+      <figcaption class="map-caption">Исправленная карта: настоящая/узнаваемая картографическая основа снизу, поверх неё — прозрачные интерактивные SVG-области для кликов и подсветки.</figcaption>
+    </figure>
+  </template>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
